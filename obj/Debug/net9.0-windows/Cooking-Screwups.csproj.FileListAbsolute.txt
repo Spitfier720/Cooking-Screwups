@@ -1,0 +1,15 @@
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\bin\Debug\net9.0-windows\Cooking-Screwups.exe
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\bin\Debug\net9.0-windows\Cooking-Screwups.deps.json
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\bin\Debug\net9.0-windows\Cooking-Screwups.runtimeconfig.json
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\bin\Debug\net9.0-windows\Cooking-Screwups.dll
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\bin\Debug\net9.0-windows\Cooking-Screwups.pdb
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\Cooking-Screwups.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\Cooking-Screwups.AssemblyInfoInputs.cache
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\Cooking-Screwups.AssemblyInfo.cs
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\Cooking-Screwups.csproj.CoreCompileInputs.cache
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\Cooking-Screwups.sourcelink.json
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\Cooking-Screwups.dll
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\refint\Cooking-Screwups.dll
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\Cooking-Screwups.pdb
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\Cooking-Screwups.genruntimeconfig.cache
+C:\Users\micha\OneDrive\Documents\GitHub\Cooking-Screwups\obj\Debug\net9.0-windows\ref\Cooking-Screwups.dll
