@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cooking-Screwups")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a85adf186f208d89287dcace52657142f81cf47c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+175497e5f025014f02a5037e857fd347fabd86f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cooking-Screwups")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cooking-Screwups")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
