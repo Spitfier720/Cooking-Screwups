@@ -19,6 +19,13 @@ function App() {
             <th>Possible Improvements</th>
             <th>Additional Notes</th>
           </tr>
+          <tr>
+            <td>December 11, 2024</td>
+            <td>Pasta</td>
+            <td>Put the pork in too early</td>
+            <td></td>
+            <td></td>
+          </tr>
         </table>
       </header>
     </div>
