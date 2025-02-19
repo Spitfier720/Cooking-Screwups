@@ -51,6 +51,10 @@ button:hover {
   background-color: #45a049;
 }
 
+.left-align {
+  text-align: left;
+}
+
 table {
   margin-top: 50px;
   border: 2px solid white;
@@ -61,6 +65,7 @@ th, td {
   border: 2px solid white;
   padding: 5px;
   font-size: medium;
+  white-space: pre-line;
 }
 
 th {
