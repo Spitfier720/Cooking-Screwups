@@ -1,20 +1,24 @@
 function Table({entries}) {
+    if (entries.length === 0) {
+        return <div>No entries available.</div>;
+    }
+    
     return (
         <table>
-        <thead>
-            <tr>
-            <th>Date</th>
-            <th>Dish Cooked</th>
-            <th>Screwups Made</th>
-            <th>Possible Improvements</th>
-            <th>Additional Notes</th>
-            </tr>
-        </thead>
-        <tbody>
-            {entries.map((entry, index) => (
-            <TableRow key={index} entry={entry} />
-            ))}
-        </tbody>
+            <thead>
+                <tr>
+                <th>Date</th>
+                <th>Dish Cooked</th>
+                <th>Screwups Made</th>
+                <th>Possible Improvements</th>
+                <th>Additional Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {entries.map((entry, index) => (
+                <TableRow key={index} entry={entry} />
+                ))}
+            </tbody>
         </table>
     )
 }
