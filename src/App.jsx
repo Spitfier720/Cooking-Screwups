@@ -11,8 +11,6 @@ function App() {
 	const [filteredEntries, setFilteredEntries] = useState([]);
 	const [commonErrors, setCommonErrors] = useState({});
 
-	console.log(import.meta.env.VITE_APP_USE_PERSONAL_DATA)
-
 	useEffect(() => {
 		if(import.meta.env.VITE_APP_USE_PERSONAL_DATA === 'true') {
 			setEntries(screwupLog);
@@ -45,6 +43,7 @@ function App() {
 						<AddScrewupPage 
 							entries={entries} 
 							setEntries={setEntries}
+							setFilteredEntries={setFilteredEntries}
 						/>
 					}
 				/>

@@ -1,39 +1,79 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AddScrewupPage({ entries, setEntries }) {
+function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
+    const [date, setDate] = useState(new Date().toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'}));
     const [dish, setDish] = useState('');
     const [screwups, setScrewups] = useState('');
+    const [improvements, setImprovements] = useState('');
+    const [notes, setNotes] = useState('');
+
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const screwupArray = screwups.split(',').map(s => s.trim());
+        const screwupArray = screwups.split('\n').map(s => s.trim());
+        const improvementArray = improvements.split('\n').map(i => i.trim());
+        const notesArray = notes.split('\n').map(n => n.trim());
         const newScrewup = {
-            date: new Date().toLocaleDateString(),
+            date: new Date(date).toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'}),
             dish: dish,
             screwups: screwupArray,
-            improvements: [],
-            notes: []
+            improvements: improvementArray,
+            notes: notesArray
         }
 
-        setEntries([...entries, newScrewup]);
+        const updatedEntries = [newScrewup, ...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        setEntries(updatedEntries);
+        setFilteredEntries(updatedEntries);
         navigate('/');
     }
 
     return (
         <div className="App">
-            <h2>Add Screwup</h2>
+            <h1>Add Screwup</h1>
             <form onSubmit={handleSubmit}>
+                <label>
+                    Date:
+                    <input 
+                        type="text" 
+                        value={date} 
+                        placeholder={new Date().toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'})}
+                        onChange={(e) => setDate(e.target.value)}
+                        required 
+                    />
+                </label>
+                <br />
                 <label>
                     Dish:
                     <input type="text" value={dish} onChange={(e) => setDish(e.target.value)} required />
                 </label>
                 <br />
-                <label>
-                    Screwups (comma separated):
-                    <input type="text" value={screwups} onChange={(e) => setScrewups(e.target.value)} required />
-                </label>
+                <p>
+                    For the text boxes below, please separate each item with a new line. <br /><br />
+                    For example: <br />
+                    <span style ={{fontFamily: 'monospace'}}>
+                        I forgot to add salt <br />
+                        I overcooked the chicken <br />
+                        I used the wrong spices <br />
+                    </span>
+                    Would be considered 3 screwups. <br />
+                </p>
+                <div className="screwup-inputs">
+                    <label>
+                        Screwups: <br />
+                        <textarea value={screwups} onChange={(e) => setScrewups(e.target.value)} />
+                    </label>
+                    <label>
+                        Possible Improvements: <br />
+                        <textarea value={improvements} onChange={(e) => setImprovements(e.target.value)} />
+                    </label>
+                    <label>
+                        Additional Notes: <br />
+                        <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
+                    </label>
+                </div>
                 <br />
                 <button type="submit">Add Screwup</button>
                 <button type="button" onClick={() => navigate('/')}>Cancel</button>
