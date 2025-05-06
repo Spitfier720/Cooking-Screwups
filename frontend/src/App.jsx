@@ -4,7 +4,6 @@ import './App.css';
 import AddScrewupPage from './AddScrewup';
 import {countCommonErrors} from './CommonErrors';
 import HomePage from './HomePage';
-import screwupLog from './screwupLog.json';
 
 function App() {
 	const [entries, setEntries] = useState([]);
@@ -13,8 +12,22 @@ function App() {
 
 	useEffect(() => {
 		if(import.meta.env.VITE_APP_USE_PERSONAL_DATA === 'true') {
-			setEntries(screwupLog);
-			setFilteredEntries(screwupLog);
+			console.log('Using personal data');
+
+			fetch('http://localhost:5000/api/screwupLog')
+				.then(response => {
+					console.log('Response:', response);
+					if (!response.ok) {
+						throw new Error('HTTP error! Status: ' + response.statusText);
+					}
+					return response.json();
+				})
+				.then(data => {
+					console.log('Fetched data:', data);
+					setEntries(data);
+					setFilteredEntries(data);
+				})
+				.catch(error => console.error('Error fetching screwupLog:', error));
 		}
 	}, []);
 

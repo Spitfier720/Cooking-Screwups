@@ -27,6 +27,28 @@ function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
 
         setEntries(updatedEntries);
         setFilteredEntries(updatedEntries);
+
+        // write a backend function to save the new entry to the JSON file
+        try {
+            const response = fetch('/api/update-screwupLog', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedEntries)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update screwupLog.json');
+            }
+
+            console.log('screwupLog.json updated successfully');
+        }
+        
+        catch (error) {
+            console.error('Error updating screwupLog.json:', error);
+        }
+
         navigate('/');
     }
 
