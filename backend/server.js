@@ -1,4 +1,3 @@
-import cors from 'cors';
 import express from 'express';
 import { writeFile, readFile } from 'fs/promises';
 import { join } from 'path';
@@ -10,7 +9,6 @@ const __dirname = join(__filename, '..');
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON request bodies
-app.use(cors()); // Enable CORS for all routes
 
 // Path to the screwupLog.json file
 const screwupLogPath = join(__dirname, 'screwupLog.json');

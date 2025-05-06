@@ -14,7 +14,7 @@ function App() {
 		if(import.meta.env.VITE_APP_USE_PERSONAL_DATA === 'true') {
 			console.log('Using personal data');
 
-			fetch('http://localhost:5000/api/screwupLog')
+			fetch('api/screwupLog')
 				.then(response => {
 					console.log('Response:', response);
 					if (!response.ok) {
