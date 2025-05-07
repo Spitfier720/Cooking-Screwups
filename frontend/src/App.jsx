@@ -44,6 +44,7 @@ function App() {
 					element = {
 						<HomePage 
 							entries={entries} 
+							setEntries={setEntries}
 							filteredEntries={filteredEntries} 
 							setFilteredEntries={setFilteredEntries} 
 							commonErrors={commonErrors}

@@ -68,6 +68,12 @@ button:focus-visible {
   }
 }
 
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 10px 10px 10px 10px;
+}
+
 input[type="text"] {
   width: 200px;
   padding: 10px;
@@ -87,13 +93,15 @@ table {
   margin: 20px 20px;
   border: 2px solid #bbbbbb;
   border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
 } 
 
 th, td {
   border: 2px solid #bbbbbb;
   padding: 5px;
   font-size: medium;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 th {

@@ -1,4 +1,4 @@
-function Table({entries}) {
+function Table({entries, selectedRows, setSelectedRows}) {
     if (entries.length === 0) {
         return <div>No entries available.</div>;
     }
@@ -7,6 +7,7 @@ function Table({entries}) {
         <table>
             <thead>
                 <tr>
+                <th></th>
                 <th>Date</th>
                 <th>Dish Cooked</th>
                 <th>Screwups Made</th>
@@ -16,27 +17,47 @@ function Table({entries}) {
             </thead>
             <tbody>
                 {entries.map((entry, index) => (
-                <TableRow key={index} entry={entry} />
+                <TableRow 
+                    key={index} 
+                    entry={entry} 
+                    selectedRows={selectedRows} 
+                    setSelectedRows={setSelectedRows} 
+                />
                 ))}
             </tbody>
         </table>
     )
 }
 
-function TableRow({entry}) {
+function TableRow({entry, selectedRows, setSelectedRows}) {
+    const handleCheckboxChange = (entry) => {
+        if (selectedRows.includes(entry)) {
+            setSelectedRows(selectedRows.filter((row) => row !== entry));
+        } else {
+            setSelectedRows([...selectedRows, entry]);
+        }
+    };
+
     return (
         <tr>
-        <td>{entry.date}</td>
-        <td>{entry.dish}</td>
-        <td className="left-align">
-            <TableEntry dataList={entry.screwups} />
-        </td>
-        <td className="left-align">
-            <TableEntry dataList={entry.improvements} />
-        </td>
-        <td className="left-align">
-            <TableEntry dataList={entry.notes} />
-        </td>
+            <td>
+                <input 
+                    type="checkbox"
+                    checked={selectedRows.includes(entry)}
+                    onChange={() => handleCheckboxChange(entry)}
+                />
+            </td>
+            <td>{entry.date}</td>
+            <td>{entry.dish}</td>
+            <td className="left-align">
+                <TableEntry dataList={entry.screwups} />
+            </td>
+            <td className="left-align">
+                <TableEntry dataList={entry.improvements} />
+            </td>
+            <td className="left-align">
+                <TableEntry dataList={entry.notes} />
+            </td>
         </tr>
     )
 }
