@@ -29,10 +29,6 @@
   align-items: center;
 }
 
-.left-align {
-  text-align: left;
-}
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -54,6 +50,27 @@
   gap: 5em;
   margin: 2em 0;
   padding: 2em;
+}
+
+.selected-actions {
+  opacity: 0;
+  transform: translateY(-20px);
+  visibility: hidden;
+}
+
+.selected-actions.active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.table-entry {
+  line-height: 1.5;
+  margin-bottom: 1em;
+}
+
+.table-entry:last-child {
+  margin-bottom: 0;
 }
 
 @keyframes logo-spin {

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
-    const [date, setDate] = useState(new Date().toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'}));
-    const [dish, setDish] = useState('');
-    const [screwups, setScrewups] = useState('');
-    const [improvements, setImprovements] = useState('');
-    const [notes, setNotes] = useState('');
+    const location = useLocation();
+    const screwupToEdit = location.state?.screwup || null;
+
+    const [date, setDate] = useState(screwupToEdit?.date || new Date().toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'}));
+    const [dish, setDish] = useState(screwupToEdit?.dish || '');
+    const [screwups, setScrewups] = useState(screwupToEdit?.screwups.join('\n') || '');
+    const [improvements, setImprovements] = useState(screwupToEdit?.improvements.join('\n') || '');
+    const [notes, setNotes] = useState(screwupToEdit?.notes.join('\n') || '');
 
     const navigate = useNavigate();
 
@@ -23,7 +26,11 @@ function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
             notes: notesArray
         }
 
-        const updatedEntries = [newScrewup, ...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
+        let updatedEntries = [newScrewup, ...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (screwupToEdit) {
+            updatedEntries = entries.map(entry => entry.date === screwupToEdit.date ? newScrewup : entry);
+        }
 
         setEntries(updatedEntries);
         setFilteredEntries(updatedEntries);
@@ -97,7 +104,7 @@ function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
                     </label>
                 </div>
                 <br />
-                <button type="submit">Add Screwup</button>
+                <button type="submit">{screwupToEdit ? 'Edit Screwup' : 'Add Screwup'}</button>
                 <button type="button" onClick={() => navigate('/')}>Cancel</button>
             </form>
         </div>

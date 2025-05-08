@@ -49,13 +49,13 @@ function TableRow({entry, selectedRows, setSelectedRows}) {
             </td>
             <td>{entry.date}</td>
             <td>{entry.dish}</td>
-            <td className="left-align">
+            <td>
                 <TableEntry dataList={entry.screwups} />
             </td>
-            <td className="left-align">
+            <td>
                 <TableEntry dataList={entry.improvements} />
             </td>
-            <td className="left-align">
+            <td>
                 <TableEntry dataList={entry.notes} />
             </td>
         </tr>
@@ -66,7 +66,7 @@ function TableEntry({dataList}) {
     return (
         <div>
         {dataList.map((data, index) => (
-            <div key={index}>{data}</div>
+            <div className="table-entry" key={index}>{data}</div>
         ))}
         </div>
     )

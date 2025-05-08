@@ -17,12 +17,18 @@ function HomePage({ entries, setEntries, filteredEntries, setFilteredEntries, co
                 <div className="functionalities">
                     <SearchBar entries={entries} setFilteredEntries={setFilteredEntries} />
                     <button onClick={() => navigate('/add-screwup')}>Add Screwup</button>
-                    {selectedRows.length > 0 && (
-                        <div>
-                            <button onClick={() => handleEdit(selectedRows)}>Edit Screwup</button>
-                            <button onClick={() => handleRemove(selectedRows, entries, setEntries, setFilteredEntries, setSelectedRows)}>Remove Screwup</button>
-                        </div>
+                    <div className={`selected-actions${selectedRows.length > 0 ? ' active' : ''}`}>
+                        {selectedRows.length === 1 && (
+                            <button onClick={() => navigate('/add-screwup', {state: {screwup: selectedRows[0]}})}>
+                                Edit Screwup
+                            </button>
+                        )}
+                        {selectedRows.length > 0 && (
+                            <button onClick={() => handleRemove(selectedRows, entries, setEntries, setFilteredEntries, setSelectedRows)}>
+                                Remove Screwup
+                            </button>
                     )}
+                    </div>
                 </div>
                 <Table 
                     entries={filteredEntries}
