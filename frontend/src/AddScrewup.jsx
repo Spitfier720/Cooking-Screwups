@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { handleScrewupsChange, handleSuggestionClick, handleKeyDown, removeSuggestion } from './Suggestion';
 
 function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
     const location = useLocation();
@@ -7,15 +8,25 @@ function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
 
     const [date, setDate] = useState(screwupToEdit?.date || new Date().toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'}));
     const [dish, setDish] = useState(screwupToEdit?.dish || '');
-    const [screwups, setScrewups] = useState(screwupToEdit?.screwups.join('\n') || '');
+    const [screwups, setScrewups] = useState(screwupToEdit?.screwups || []);
+    const [currentScrewup, setCurrentScrewup] = useState('');
     const [improvements, setImprovements] = useState(screwupToEdit?.improvements.join('\n') || '');
     const [notes, setNotes] = useState(screwupToEdit?.notes.join('\n') || '');
 
+    const [suggestions, setSuggestions] = useState([]);
+    const [allScrewups, setAllScrewups] = useState(new Set());
+    const [selectedIndex, setSelectedIndex] = useState(-1);
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const allPreviousScrewups = new Set(entries.flatMap(entry => entry.screwups));
+        setAllScrewups(allPreviousScrewups);
+    }, [entries]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const screwupArray = screwups.split('\n').map(s => s.trim());
+        const screwupArray = screwups;
         const improvementArray = improvements.split('\n').map(i => i.trim());
         const notesArray = notes.split('\n').map(n => n.trim());
         const newScrewup = {
@@ -24,6 +35,12 @@ function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
             screwups: screwupArray,
             improvements: improvementArray,
             notes: notesArray
+        }
+
+        if(newScrewup.date === "Invalid Date") {
+            e.target[0].setCustomValidity("Please enter a valid date.");
+            e.target[0].reportValidity();
+            return;
         }
 
         let updatedEntries = [newScrewup, ...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -61,7 +78,7 @@ function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
 
     return (
         <div className="App">
-            <h1>Add Screwup</h1>
+            <h1>{screwupToEdit ? 'Edit Screwup' : 'Add Screwup'}</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     Date:
@@ -83,16 +100,50 @@ function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
                     For the text boxes below, please separate each item with a new line. <br /><br />
                     For example: <br />
                     <span style ={{fontFamily: 'monospace'}}>
-                        I forgot to add salt <br />
-                        I overcooked the chicken <br />
-                        I used the wrong spices <br />
+                        Forgot to add salt <br />
+                        Overcooked the chicken <br />
+                        Used the wrong spices <br />
                     </span>
                     Would be considered 3 screwups. <br />
                 </p>
                 <div className="screwup-inputs">
                     <label>
                         Screwups: <br />
-                        <textarea value={screwups} onChange={(e) => setScrewups(e.target.value)} />
+                        <input
+                            type="text"
+                            placeholder="Enter screwups here..."
+                            className="screwup-input"
+                            value={currentScrewup}
+                            onChange={(e) => handleScrewupsChange(e, setSuggestions, allScrewups, setCurrentScrewup)} 
+                            onKeyDown={(e) => handleKeyDown(e, suggestions, setSuggestions, selectedIndex, setSelectedIndex, screwups, setScrewups, currentScrewup, setCurrentScrewup)}
+                        />
+                        {suggestions.length > 0 && (
+                            <ul className="suggestions">
+                                {suggestions.map((suggestion, index) => (
+                                    <li 
+                                        key={index} 
+                                        className={index === selectedIndex ? 'selected' : ''}
+                                        onClick={() => handleSuggestionClick(suggestion, screwups, setScrewups, setSuggestions, setSelectedIndex, setCurrentScrewup)}
+                                    >
+                                        {suggestion}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                        <div className="screwup-list">
+                            {screwups.map((screwup, index) => (
+                                <div key={index} className="screwup-item">
+                                    {screwup}
+                                    <button
+                                        type="button"
+                                        className='remove-button'
+                                        onClick={() => removeSuggestion(index, screwups, setScrewups)}
+                                    >
+                                        X
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
                     </label>
                     <label>
                         Possible Improvements: <br />

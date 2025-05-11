@@ -1,5 +1,3 @@
-import React from "react";
-
 function CommonErrors({ commonErrors }) {
     if (Object.keys(commonErrors).length !== 0) {
         return (

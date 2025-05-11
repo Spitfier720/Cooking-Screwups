@@ -1,5 +1,3 @@
-import React from 'react';
-
 function SearchBar({ entries, setFilteredEntries }) {
     const handleSearchChange = (e) => {
         const query = e.target.value;

@@ -42,14 +42,39 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.remove-button:hover {
+  border-color: #ccc
+}
+
+.screwup-input {
+  width: 450px;
+  font-size: 0.8em
+}
+
 .screwup-inputs {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: top;
   gap: 5em;
   margin: 2em 0;
   padding: 2em;
+}
+
+.screwup-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  background-color: #555555;
+  font-weight: normal;
+  font-size: 0.8em;
+}
+
+.screwup-list {
+  margin: 1em 10px;
 }
 
 .selected-actions {
@@ -62,6 +87,35 @@
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+}
+
+.suggestions {
+  list-style-type: none;
+  margin: 0px 10px;
+  padding: 0px 10px;
+  border: 1px solid #ccc;
+  background-color: #555555;
+  max-height: 350px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 428px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.suggestions li:hover {
+  background-color: #ccc;
+}
+
+.suggestions li.selected {
+  background-color: #bbb; /* Highlight the selected suggestion */
 }
 
 .table-entry {
