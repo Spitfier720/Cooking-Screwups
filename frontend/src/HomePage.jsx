@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import CommonErrors from './CommonErrors';
 import {handleRemove} from './RemoveScrewup';
@@ -30,12 +30,18 @@ function HomePage({ entries, setEntries, filteredEntries, setFilteredEntries, co
                     )}
                     </div>
                 </div>
+                <div className="entry-select">
+                    <button onClick={() => setSelectedRows(filteredEntries)}>Select All</button>
+                    <button onClick={() => setSelectedRows([])}>Deselect All</button>
+                </div>
                 <Table 
                     entries={filteredEntries}
                     selectedRows={selectedRows}
                     setSelectedRows={setSelectedRows}
                 />
                 <CommonErrors commonErrors={commonErrors} />
+                <br />
+                Currently showing {filteredEntries.length} entries.
             </header>
         </div>
     );
