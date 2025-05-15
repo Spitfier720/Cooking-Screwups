@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddScrewupPage from './AddScrewup';
 import {countCommonErrors} from './CommonErrors';
+import HelpPage from './HelpPage';
 import HomePage from './HomePage';
 
 function App() {
@@ -59,6 +60,12 @@ function App() {
 							setEntries={setEntries}
 							setFilteredEntries={setFilteredEntries}
 						/>
+					}
+				/>
+				<Route
+					path="/help"
+					element={
+						<HelpPage />
 					}
 				/>
 			</Routes>

@@ -35,6 +35,38 @@
   align-items: center;
 }
 
+.help-button {
+  margin-left: auto;
+}
+
+.help-section {
+  font-size: 1.15em;
+  line-height: 1.8;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 2em 1em;
+  text-align: left;
+}
+
+.help-section strong {
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+  color: #ffe082;
+  letter-spacing: 0.5px;
+}
+
+.help-section hr {
+  margin: 1.5em 0;
+  border: none;
+  border-top: 1px solid #888;
+}
+
+.help-section div {
+  margin-bottom: 0.5em;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

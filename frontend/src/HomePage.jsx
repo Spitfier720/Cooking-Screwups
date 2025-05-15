@@ -12,6 +12,7 @@ function HomePage({ entries, setEntries, filteredEntries, setFilteredEntries, co
     return (
         <div className="App">
             <header className="App-header">
+                <button className="help-button" onClick={() => navigate('/help')}>Help</button>
                 <title>Cooking Screwups</title>
                 <h1>Cooking Screwups</h1>
                 <div className="functionalities">

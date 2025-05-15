@@ -1,3 +1,44 @@
+function SuggestionInput({screwups, setScrewups, currentScrewup, setCurrentScrewup, suggestions, setSuggestions, allScrewups, selectedIndex, setSelectedIndex}) {
+    return (
+        <div>
+            <input
+                type="text"
+                className="screwup-input"
+                value={currentScrewup}
+                onChange={(e) => handleScrewupsChange(e, setSuggestions, allScrewups, setCurrentScrewup)} 
+                onKeyDown={(e) => handleKeyDown(e, suggestions, setSuggestions, selectedIndex, setSelectedIndex, screwups, setScrewups, currentScrewup, setCurrentScrewup)}
+            />
+            {suggestions.length > 0 && (
+                <ul className="suggestions">
+                    {suggestions.map((suggestion, index) => (
+                        <li 
+                            key={index} 
+                            className={index === selectedIndex ? 'selected' : ''}
+                            onClick={() => handleSuggestionClick(suggestion, screwups, setScrewups, setSuggestions, setSelectedIndex, setCurrentScrewup)}
+                        >
+                            {suggestion}
+                        </li>
+                    ))}
+                </ul>
+            )}
+            <div className="screwup-list">
+                {screwups.map((screwup, index) => (
+                    <div key={index} className="screwup-item">
+                        {screwup}
+                        <button
+                            type="button"
+                            className='remove-button'
+                            onClick={() => removeSuggestion(index, screwups, setScrewups)}
+                        >
+                            X
+                        </button>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
 export const handleScrewupsChange = (e, setSuggestions, allScrewups, setCurrentScrewup) => {
     const input = e.target.value;
     setCurrentScrewup(input);
@@ -49,3 +90,5 @@ export const removeSuggestion = (index, screwups, setScrewups) => {
     const updatedScrewups = screwups.filter((_, i) => i !== index);
     setScrewups(updatedScrewups);
 }
+
+export default SuggestionInput;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { handleScrewupsChange, handleSuggestionClick, handleKeyDown, removeSuggestion } from './Suggestion';
+import SuggestionInput from './Suggestion';
 
 function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
     const location = useLocation();
@@ -78,86 +78,65 @@ function AddScrewupPage({ entries, setEntries, setFilteredEntries }) {
 
     return (
         <div className="App">
-            <h1>{screwupToEdit ? 'Edit Screwup' : 'Add Screwup'}</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Date:
-                    <input 
-                        type="text" 
-                        value={date} 
-                        placeholder={new Date().toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'})}
-                        onChange={(e) => setDate(e.target.value)}
-                        required 
-                    />
-                </label>
-                <br />
-                <label>
-                    Dish:
-                    <input type="text" value={dish} onChange={(e) => setDish(e.target.value)} required />
-                </label>
-                <br />
-                <p>
-                    For the text boxes below, please separate each item with a new line. <br /><br />
-                    For example: <br />
-                    <span style ={{fontFamily: 'monospace'}}>
-                        Forgot to add salt <br />
-                        Overcooked the chicken <br />
-                        Used the wrong spices <br />
-                    </span>
-                    Would be considered 3 screwups. <br />
-                </p>
-                <div className="screwup-inputs">
+            <header className="App-header">
+                <button className="help-button" onClick={() => navigate('/help')}>Help</button>
+                <h1>{screwupToEdit ? 'Edit Screwup' : 'Add Screwup'}</h1>
+                <form onSubmit={handleSubmit}>
                     <label>
-                        Screwups: <br />
-                        <input
-                            type="text"
-                            placeholder="Enter screwups here..."
-                            className="screwup-input"
-                            value={currentScrewup}
-                            onChange={(e) => handleScrewupsChange(e, setSuggestions, allScrewups, setCurrentScrewup)} 
-                            onKeyDown={(e) => handleKeyDown(e, suggestions, setSuggestions, selectedIndex, setSelectedIndex, screwups, setScrewups, currentScrewup, setCurrentScrewup)}
+                        Date:
+                        <input 
+                            type="text" 
+                            value={date} 
+                            placeholder={new Date().toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'})}
+                            onChange={(e) => setDate(e.target.value)}
+                            required 
                         />
-                        {suggestions.length > 0 && (
-                            <ul className="suggestions">
-                                {suggestions.map((suggestion, index) => (
-                                    <li 
-                                        key={index} 
-                                        className={index === selectedIndex ? 'selected' : ''}
-                                        onClick={() => handleSuggestionClick(suggestion, screwups, setScrewups, setSuggestions, setSelectedIndex, setCurrentScrewup)}
-                                    >
-                                        {suggestion}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                        <div className="screwup-list">
-                            {screwups.map((screwup, index) => (
-                                <div key={index} className="screwup-item">
-                                    {screwup}
-                                    <button
-                                        type="button"
-                                        className='remove-button'
-                                        onClick={() => removeSuggestion(index, screwups, setScrewups)}
-                                    >
-                                        X
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
                     </label>
+                    <br />
                     <label>
-                        Possible Improvements: <br />
-                        <textarea value={improvements} onChange={(e) => setImprovements(e.target.value)} />
+                        Dish:
+                        <input type="text" value={dish} onChange={(e) => setDish(e.target.value)} required />
                     </label>
-                    <label>
-                        Additional Notes: <br />
-                        <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
-                    </label>
-                </div>
-                <br />
-                <button type="submit">{screwupToEdit ? 'Edit Screwup' : 'Add Screwup'}</button>
-                <button type="button" onClick={() => navigate('/')}>Cancel</button>
-            </form>
+                    <br />
+                    <p>
+                        For the text boxes below, please separate each item with a new line. <br /><br />
+                        For example: <br />
+                        <span style ={{fontFamily: 'monospace'}}>
+                            Forgot to add salt <br />
+                            Overcooked the chicken <br />
+                            Used the wrong spices <br />
+                        </span>
+                        Would be considered 3 screwups. <br />
+                    </p>
+                    <div className="screwup-inputs">
+                        <label>
+                            Screwups: <br />
+                            <SuggestionInput 
+                                screwups={screwups}
+                                setScrewups={setScrewups}
+                                currentScrewup={currentScrewup}
+                                setCurrentScrewup={setCurrentScrewup}
+                                suggestions={suggestions}
+                                setSuggestions={setSuggestions}
+                                allScrewups={allScrewups}
+                                selectedIndex={selectedIndex}
+                                setSelectedIndex={setSelectedIndex}
+                            />
+                        </label>
+                        <label>
+                            Possible Improvements: <br />
+                            <textarea value={improvements} onChange={(e) => setImprovements(e.target.value)} />
+                        </label>
+                        <label>
+                            Additional Notes: <br />
+                            <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
+                        </label>
+                    </div>
+                    <br />
+                    <button type="submit">{screwupToEdit ? 'Edit Screwup' : 'Add Screwup'}</button>
+                    <button type="button" onClick={() => navigate('/')}>Cancel</button>
+                </form>
+            </header>
         </div>
     );
 }
