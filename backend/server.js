@@ -13,6 +13,10 @@ app.use(express.json()); // Middleware to parse JSON request bodies
 // Path to the screwupLog.json file
 const screwupLogPath = join(__dirname, 'screwupLog.json');
 
+app.get('/', (req, res) => {
+    res.send('Backend server is running!');
+});
+
 // Endpoint to get the screwupLog.json data
 app.get('/api/screwupLog', async (req, res) => {
     try {

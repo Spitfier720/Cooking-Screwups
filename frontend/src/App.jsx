@@ -5,6 +5,7 @@ import AddScrewupPage from './AddScrewup';
 import {countCommonErrors} from './CommonErrors';
 import HelpPage from './HelpPage';
 import HomePage from './HomePage';
+import ScrollToTop from './ScrollToTop';
 
 function App() {
 	const [entries, setEntries] = useState([]);
@@ -13,9 +14,7 @@ function App() {
 
 	useEffect(() => {
 		if(import.meta.env.VITE_APP_USE_PERSONAL_DATA === 'true') {
-			console.log('Using personal data');
-
-			fetch('api/screwupLog')
+			fetch('/api/screwupLog')
 				.then(response => {
 					console.log('Response:', response);
 					if (!response.ok) {
@@ -39,6 +38,7 @@ function App() {
 
 	return (
 		<Router>
+			<ScrollToTop />
 			<Routes>
 				<Route 
 					path = "/"
